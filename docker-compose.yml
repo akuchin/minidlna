@@ -4,6 +4,7 @@ services:
 
   mongo:
     image: temak/minidlna
+    container_name: minidlna
     restart: always
     network_mode: "host"
     volumes:
