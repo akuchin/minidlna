@@ -1,16 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-export PIDFILE='/minidlna/minidlna.pid'
-export PUID="${PUID:-100}"
-export PGID="${PGID:-101}"
+if [ -e /run/minidlna/minidlna.pid ]; then
+    rm /run/minidlna/minidlna.pid
+fi
 
-echo '=== Set user and group identifier'
-groupmod --non-unique --gid "$PGID" minidlna
-usermod --non-unique --uid "$PUID" minidlna
-
-echo '=== Set permissions'
-mkdir -p /minidlna/
-chown -R "${PUID}:${PGID}" /minidlna/
-
-
-exec su-exec minidlna /usr/sbin/minidlnad -P "$PIDFILE" -S "$@"
+exec /usr/sbin/minidlnad -S
