@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: temak/minidlna
+    restart: always
+    network_mode: "host"
+    volumes:
+      - "/volume1/nas-storage/amedia:/amedia"
+      - "./minidlna.conf:/etc/minidlna.conf"
