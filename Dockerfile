@@ -2,7 +2,7 @@ FROM alpine:20230329
 
 # Install
 RUN apk --no-cache add bash curl minidlna tini shadow su-exec alpine-conf inotify-tools
-
+RUN echo 'fs.inotify.max_user_watches = 100000' >> /etc/sysctl.conf
 # Entrypoint
 COPY entrypoint.sh /
 ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh"]
